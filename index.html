@@ -14,18 +14,25 @@
 
     </ul>
     <script>
-        $('#vkUnLogin').hide();
+        if (localStorage.id === '' || localStorage.id === undefined){
+            $('#vkUnLogin').hide();
+            $('#vkGetFriends').hide();
+        }
+        else {$('#vkLogin').hide();}
         $(document).ready(function() {
             let user = {id: 0};
-            VK.init({apiId: 6997982});
+            VK.init({apiId: 6998687});
             $('#vkLogin').on('click', function(){
                 VK.Auth.login(function(response) {
                 console.log(response);
                 if (response.status === 'connected') {
-                    user = response.session.user;
+                    localStorage.id = response.session.user.id;
+                   /* localStorage.first_name = response.session.user.first_name;
+                    localStorage.last_name = response.session.user.last_name;*/
                     $('#friends').show();
                     $('#vkLogin').hide();
                     $('#vkUnLogin').show();
+                    $('#vkGetFriends').show();
                 } else if (response.status === 'not_authorized') { 
                     console.log("Разрешите доступ приложению");
                 } else if (response.status === 'unknown') {
@@ -40,12 +47,14 @@
                 $('#friends').hide();
                 $('#vkLogin').show();
                 $('#vkUnLogin').hide();
+                $('#vkGetFriends').hide();
+                localStorage.user = '';
                 });
             });
             $('#vkGetFriends').on('click', function(){
                 VK.Api.call('friends.search',
                 {
-                    user_id: user.id,
+                    user_id: localStorage.id,
                     v: '5.73',
                     count: 5
                 },function(resp){
