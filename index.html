@@ -1,0 +1,48 @@
+ <!DOCTYPE html>
+<html lang="ru-RU">
+<head>
+    <meta charset="UTF-8">
+    <title>VK Auth</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://vk.com/js/api/openapi.js?154" type="text/javascript"></script>
+</head>
+<body>
+    <button type="button" id="vkLogin">Войти</button>
+    <button type="button" id="vkUnLogin">Выйти</button>
+    <button type="button" id="vkGetFriends">Получить друзей</button>
+    <ul id="friends">
+        
+    </ul>
+    <script>
+        $(document).ready(function() {
+            let user
+            VK.init({apiId: 6997982});
+            $('#vkLogin').on('click', function(){
+                VK.Auth.login(function(response) {
+                console.log(response);
+                if (response.status === 'connected') {
+                    user = response.session.user;
+                } else if (response.status === 'not_authorized') { 
+                    console.log("Разрешите доступ приложению");
+                } else if (response.status === 'unknown') {
+                    console.log("Авторизуйтесь в ВКонтакте");
+                }
+                }, VK.access.FRIENDS);
+            })
+            
+            $('#vkUnLogin').on('click', function () {
+                VK.Auth.logout(function (response) {
+                console.log(response);
+                });
+            });
+            $('#vkGetFriends').on('click', function(){
+                VK.Api.call('friends.search',
+                {
+                    user_id: user.user_id,
+                    v: '5.73',
+                    count: 5
+                })
+            })
+        });
+    </script>
+</body>
