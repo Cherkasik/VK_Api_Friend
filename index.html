@@ -11,7 +11,7 @@
     <button type="button" id="vkUnLogin">Выйти</button>
     <button type="button" id="vkGetFriends">Получить друзей</button>
     <ul id="friends">
-        
+
     </ul>
     <script>
         $(document).ready(function() {
@@ -38,9 +38,11 @@
             $('#vkGetFriends').on('click', function(){
                 VK.Api.call('friends.search',
                 {
-                    user_id: user.user_id,
+                    user_id: user.id,
                     v: '5.73',
                     count: 5
+                },function(resp){
+                    console.log(resp);
                 })
             })
         });
