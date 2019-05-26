@@ -17,7 +17,7 @@
         $('#vkUnLogin').hide();
         $(document).ready(function() {
             let user;
-            user.id = 0;
+            user = {id: 0};
             VK.init({apiId: 6997982});
             $('#vkLogin').on('click', function(){
                 VK.Auth.login(function(response) {
