@@ -27,6 +27,7 @@
         </ul>
     </div>
     <script>
+        VK.init({apiId: 6998687});
         if (localStorage.id === '' || localStorage.id === undefined){
             $('#vkUnLogin').hide();
             $('#vkGetFriends').hide();
@@ -34,7 +35,6 @@
         else {$('#vkLogin').hide();}
         $(document).ready(function() {
             let user = {id: 0};
-            VK.init({apiId: 6998687});
             $('#vkLogin').on('click', function(){
                 VK.Auth.login(function(response) {
                 console.log(response);
