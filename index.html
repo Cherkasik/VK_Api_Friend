@@ -5,12 +5,23 @@
     <title>VK Auth</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://vk.com/js/api/openapi.js?154" type="text/javascript"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 </head>
 <body>
-    <button type="button" id="vkLogin">Войти</button>
-    <button type="button" id="vkUnLogin">Выйти</button>
-    <button type="button" id="vkGetFriends">Получить друзей</button>
-    <ul id="friends">
+    <div clas="container">
+        <div class="row">
+            <div class="col s4">
+                <button class="waves-effect waves-light btn-large" type="button" id="vkLogin">Войти</button>
+            </div>
+            <div class="col s4">
+                <button class="waves-effect waves-light btn-large" type="button" id="vkUnLogin">Выйти</button>
+            </div>
+            <div class="col s4">
+                <button class="waves-effect waves-light btn-large" type="button" id="vkGetFriends">Получить друзей</button>
+            </div>
+        </div>
+    </div>
+    <ul class="collection" id="friends">
 
     </ul>
     <script>
@@ -61,7 +72,7 @@
                     let list = "";
                     for (let i = 0; i < resp.response.items.length; i++){
                         item = resp.response.items[i];
-                        list += "<li>" + item.first_name + " " + item.last_name + "</li>";
+                        list += "<li class=\"collection-item\">" + item.first_name + " " + item.last_name + "</li>";
                     }
                     $('#friends').html(list);
                 })
