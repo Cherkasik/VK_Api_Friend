@@ -23,7 +23,6 @@
     </div>
     <div class="container">
         <ul class="collection with-header" id="friends">
-            <li class="collection-header center-align"><h4>Ваши Друзья</h4></li>
 
         </ul>
     </div>
@@ -72,10 +71,10 @@
                     v: '5.73',
                     count: 5
                 },function(resp){
-                    let list = "";
+                    let list = "<li class=\"collection-header center-align\"><h4>Ваши Друзья</h4></li>";
                     for (let i = 0; i < resp.response.items.length; i++){
                         item = resp.response.items[i];
-                        list += "<li class=\"collection-item center-aligned\">" + item.first_name + " " + item.last_name + "</li>";
+                        list += "<li class=\"collection-item center-align\">" + item.first_name + " " + item.last_name + "</li>";
                     }
                     $('#friends').html(list);
                 })
